@@ -8,8 +8,8 @@ var ctx = canvas.getContext("2d");
 var enemyImg = document.createElement('img');
 enemyImg.src = "images/slime.gif";
 var enemy = {
-  x = 96,
-  y = 480
+  x: 96,
+  y: 480-32
 };
 
 function draw() {
