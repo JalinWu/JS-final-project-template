@@ -17,4 +17,4 @@ function draw() {
   ctx.drawImage(enemyImg, enemy.x, enemy.y);
 }
 
-setTimeout(draw, 1000);
+setInterval(draw, 16);
