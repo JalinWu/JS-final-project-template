@@ -11,8 +11,8 @@ var enemy = {
 var towerImg = document.createElement('img');
 towerImg.src = "images/tower-btn.png";
 var tower = {
-  x: 120,
-  y: 120,
+  x: 540,
+  y: 380,
   width: 100,
   height: 100
 };
