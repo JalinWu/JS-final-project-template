@@ -11,8 +11,8 @@ var enemy = {
 var towerImg = document.createElement('img');
 towerImg.src = "images/tower-btn.png";
 var tower = {
-  x: 680-32,
-  y: 480-32
+  x: 120,
+  y: 120
 };
 
 var canvas = document.getElementById("game-canvas");
