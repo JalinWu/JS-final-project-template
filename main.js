@@ -12,7 +12,9 @@ var towerImg = document.createElement('img');
 towerImg.src = "images/tower-btn.png";
 var tower = {
   x: 120,
-  y: 120
+  y: 120,
+  width: 100,
+  height: 100
 };
 
 var canvas = document.getElementById("game-canvas");
@@ -22,7 +24,7 @@ var ctx = canvas.getContext("2d");
 function draw() {
   ctx.drawImage(bgImg, 0, 0);
   ctx.drawImage(enemyImg, enemy.x, enemy.y);
-  ctx.drawImage(towerImg, tower.x, tower.y, 100, 100);
+  ctx.drawImage(towerImg, tower.x, tower.y, tower.width, tower.height);
 }
 
 setInterval(draw, 16);
