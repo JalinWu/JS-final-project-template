@@ -8,14 +8,25 @@ var enemy = {
   y: 480-32
 };
 
-var towerImg = document.createElement('img');
-towerImg.src = "images/tower-btn.png";
-var tower = {
+var towerBtnImg = document.createElement('img');
+towerBtnImg.src = "images/tower-btn.png";
+var towerBtn = {
   x: 540,
   y: 380,
   width: 100,
   height: 100
 };
+
+var towerImg = document.createElement('img');
+towerImg.src = "images/tower.png";
+
+var cursor = {};
+$("#game-canvas").on("mousemove",function(event){
+  cursor = {
+    x: event.offsetX,
+    y: event.offsetY
+  };
+});
 
 var canvas = document.getElementById("game-canvas");
 //取得2D繪圖用的物件
@@ -24,7 +35,10 @@ var ctx = canvas.getContext("2d");
 function draw() {
   ctx.drawImage(bgImg, 0, 0);
   ctx.drawImage(enemyImg, enemy.x, enemy.y);
-  ctx.drawImage(towerImg, tower.x, tower.y, tower.width, tower.height);
+  ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
+  ctx.drawImage(towerImg, cursor.x, cursor.y);
 }
 
 setInterval(draw, 16);
+
+
