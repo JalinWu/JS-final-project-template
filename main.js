@@ -29,7 +29,7 @@ $("#game-canvas").on("mousemove",function(event){
   };
 });
 
-$("#game-canvas").on("click", function(event){
+$("#game-canvas").on("click", function(){
   console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
 });
 
