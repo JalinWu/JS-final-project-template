@@ -22,6 +22,7 @@ towerImg.src = "images/tower.png";
 
 var cursor = {};
 $("#game-canvas").on("mousemove",function(event){
+  conlose.log("x: " + event.offsetX + " y: " + event.offsetY);
   cursor = {
     x: event.offsetX,
     y: event.offsetY
