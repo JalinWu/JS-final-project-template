@@ -29,8 +29,15 @@ $("#game-canvas").on("mousemove",function(event){
   };
 });
 
+var isBuilding = false;
 $("#game-canvas").on("click", function(){
-  console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
+//   console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
+  if (isBuilding){
+    isBuilding = false;
+  }else{
+    isBuilding = true;
+  }
+  console.log(isBuilding);
 });
 
 var canvas = document.getElementById("game-canvas");
@@ -41,7 +48,10 @@ function draw() {
   ctx.drawImage(bgImg, 0, 0);
   ctx.drawImage(enemyImg, enemy.x, enemy.y);
   ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
-  ctx.drawImage(towerImg, cursor.x, cursor.y);
+  if(isBuilding){
+    ctx.drawImage(towerImg, cursor.x, cursor.y);
+  }
+  
 }
 
 setInterval(draw, 16);
