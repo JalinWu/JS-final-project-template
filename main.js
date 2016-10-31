@@ -22,11 +22,15 @@ towerImg.src = "images/tower.png";
 
 var cursor = {};
 $("#game-canvas").on("mousemove",function(event){
-  console.log("x: " + event.offsetX + " y: " + event.offsetY);
+//   console.log("x: " + event.offsetX + " y: " + event.offsetY);
   cursor = {
     x: event.offsetX,
     y: event.offsetY
   };
+});
+
+$("#game-canvas").on("click", function(event){
+  console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
 });
 
 var canvas = document.getElementById("game-canvas");
