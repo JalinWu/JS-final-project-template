@@ -32,10 +32,10 @@ $("#game-canvas").on("mousemove",function(event){
 var isBuilding = false;
 $("#game-canvas").on("click", function(){
 //   console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
-  if (isBuilding){
-    isBuilding = false;
-  }else{
+  if (isBuilding == false){
     isBuilding = true;
+  }else{
+    isBuilding = false;
   }
   console.log(isBuilding);
 });
