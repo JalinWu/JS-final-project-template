@@ -38,8 +38,8 @@ $("#game-canvas").on("click", function(){
   }else{
     isBuilding = false;
     tower = {
-      x: event.offsetX,
-      y: event.offsetY
+      x: event.offsetX - event.offsetX % 32,
+      y: event.offsetY - event.offsetY % 32
     };
   }
   console.log(isBuilding);
