@@ -30,23 +30,19 @@ $("#game-canvas").on("mousemove",function(event){
 });
 
 var isBuilding = false;
+var tower = {};
 $("#game-canvas").on("click", function(){
 //   console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
   if (isBuilding == false){
     isBuilding = true;
   }else{
     isBuilding = false;
+    tower = {
+      x: event.offsetX,
+      y: event.offsetY
+    };
   }
   console.log(isBuilding);
-});
-
-var tower = {};
-$("#game-canvas").on("click", function(){
-  console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
-  tower = {
-    x: event.offsetX,
-    y: event.offsetY
-  };
 });
 
 var canvas = document.getElementById("game-canvas");
