@@ -35,10 +35,17 @@ $("#game-canvas").on("click", function(){
   if (isBuilding == false){
     isBuilding = true;
   }else{
-    ctx.drawImage(towerImg, cursor.x, cursor.y);
     isBuilding = false;
   }
   console.log(isBuilding);
+});
+
+var tower = {};
+$("#game-canvas").on("click", function(){
+  tower = {
+    x: event.offsetX,
+    y: event.offsetY
+  };
 });
 
 var canvas = document.getElementById("game-canvas");
@@ -51,6 +58,8 @@ function draw() {
   ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
   if(isBuilding){
     ctx.drawImage(towerImg, cursor.x, cursor.y);
+  }else{
+    ctx.drawImage(towerImg, tower.x, tower.y);
   }
   
 }
