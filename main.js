@@ -42,6 +42,7 @@ $("#game-canvas").on("click", function(){
 
 var tower = {};
 $("#game-canvas").on("click", function(){
+  console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
   tower = {
     x: event.offsetX,
     y: event.offsetY
@@ -58,9 +59,8 @@ function draw() {
   ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
   if(isBuilding){
     ctx.drawImage(towerImg, cursor.x, cursor.y);
-  }else{
-    ctx.drawImage(towerImg, tower.x, tower.y);
   }
+  ctx.drawImage(towerImg, tower.x, tower.y);
   
 }
 
