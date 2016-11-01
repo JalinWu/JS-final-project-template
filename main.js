@@ -35,6 +35,7 @@ $("#game-canvas").on("click", function(){
   if (isBuilding == false){
     isBuilding = true;
   }else{
+    ctx.drawImage(towerImg, cursor.x, cursor.y);
     isBuilding = false;
   }
   console.log(isBuilding);
