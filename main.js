@@ -1,11 +1,18 @@
 var bgImg = document.createElement('img');
 bgImg.src = "images/map.png";
 
+var FPS = 60;
 var enemyImg = document.createElement('img');
 enemyImg.src = "images/slime.gif";
 var enemy = {
   x: 96,
-  y: 480-32
+  y: 480-32,
+  speedX: 0,
+  speedY: -64
+  move: function() {
+    this.x += this.speedX/FPS;
+    this.y += this.speedY/FPS;
+  }
 };
 
 var towerBtnImg = document.createElement('img');
@@ -60,6 +67,6 @@ function draw() {
   
 }
 
-setInterval(draw, 16);
+setInterval(draw, 1000/FPS);
 
 
