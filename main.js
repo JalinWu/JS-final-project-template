@@ -1,23 +1,27 @@
-var bgImg = document.createElement('img');
-bgImg.src = "images/map.png";
+var canvas = document.getElementById("game-canvas");
+var ctx = canvas.getContext("2d");
 
 var FPS = 60;
-var enemyImg = document.createElement('img');
-enemyImg.src = "images/slime.gif";
-var enemy = {
-  x: 96,
-  y: 480-32,
-  speedX: 0,
-  speedY: -64,
-  pathDes: 0,
-  move: function(){
+var clock = 0;
+var cursor = {};
+var isBuilding = false;
+var tower = {};
+var enemies = [];
+
+function Enemy() {
+    this.x = 96;
+    this.y = 480-32;
+    this.speedX = 0;
+    this.speedY = -64;
+    this.pathDes = 0;
+    this.move = function(){
         if( isCollided(enemyPath[this.pathDes].x, enemyPath[this.pathDes].y, this.x, this.y, 64/FPS, 64/FPS) ){
 
-            // 首先，修正位置到目標路徑點
+            // 首先，移動到下一個路徑點
             this.x = enemyPath[this.pathDes].x;
             this.y = enemyPath[this.pathDes].y;
 
-            // 指定下一個路徑點為目標路徑點
+            // 指定下一個路徑點
             this.pathDes++;
 
             // 重新設定設定前往目標路徑點的所需的水平/垂直速度
@@ -39,8 +43,9 @@ var enemy = {
             this.x = this.x + this.speedX/FPS;
             this.y = this.y + this.speedY/FPS;
         }
-    }
-};
+    };
+}
+
 
 var enemyPath = [
     {x:96, y:64},
@@ -52,62 +57,63 @@ var enemyPath = [
     {x:544, y:96}
 ];
 
-var towerBtnImg = document.createElement('img');
-towerBtnImg.src = "images/tower-btn.png";
-var towerBtn = {
-  x: 540,
-  y: 380,
-  width: 100,
-  height: 100
-};
-
-var towerImg = document.createElement('img');
+// ====== 引入圖檔 ====== //
+var bgImg = document.createElement("img");
+bgImg.src = "images/map.png";
+var buttonImg = document.createElement("img");
+buttonImg.src = "images/tower-btn.png";
+var towerImg = document.createElement("img");
 towerImg.src = "images/tower.png";
+var slimeImg = document.createElement("img");
+slimeImg.src = "images/slime.gif";
+// ==================== //
 
-var cursor = {};
-$("#game-canvas").on("mousemove",function(event){
-//   console.log("x: " + event.offsetX + " y: " + event.offsetY);
-  cursor = {
-    x: event.offsetX,
-    y: event.offsetY
-  };
-});
-
-var isBuilding = false;
-var tower = {};
-$("#game-canvas").on("click", function(){
-//   console.log("click: x: " + event.offsetX + " y: " + event.offsetY);
-  if (isBuilding == false){
-    isBuilding = true;
-  }else{
-    isBuilding = false;
-    tower = {
-      x: event.offsetX - event.offsetX % 32,
-      y: event.offsetY - event.offsetY % 32
+$("#game-canvas").on("mousemove", function(event) {
+    cursor = {
+        x: event.offsetX,
+        y: event.offsetY
     };
-  }
-  console.log(isBuilding);
 });
 
-var canvas = document.getElementById("game-canvas");
-//取得2D繪圖用的物件
-var ctx = canvas.getContext("2d");
+$("#game-canvas").on("click", function(){
+    if( isCollided(cursor.x, cursor.y, 640-64, 480-64, 64, 64) ){
+        if (isBuilding) {
+            isBuilding = false;
+        } else {
+            isBuilding = true;
+        }
+    } else if (isBuilding) {
+        tower.x = cursor.x - cursor.x%32;
+        tower.y = cursor.y - cursor.y%32;
+    }
+});
 
-function draw() {
-  
-  enemy.move();
-  
-  ctx.drawImage(bgImg, 0, 0);
-  ctx.drawImage(enemyImg, enemy.x, enemy.y);
-  ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
-  if(isBuilding){
-    ctx.drawImage(towerImg, cursor.x, cursor.y);
-  }
-  ctx.drawImage(towerImg, tower.x, tower.y);
-  
+function draw(){
+
+    if(clock%80==0){
+        enemies.push(new Enemy());
+    }
+
+    ctx.drawImage(bgImg,0,0);
+    ctx.drawImage(buttonImg, 640-64, 480-64, 64, 64);
+    ctx.drawImage(towerImg, tower.x, tower.y);
+    if(isBuilding){
+        ctx.drawImage(towerImg, cursor.x, cursor.y);
+    }
+
+    for(var i=0; i<enemies.length; i++){
+        enemies[i].move();
+        ctx.drawImage( slimeImg, enemies[i].x, enemies[i].y);
+    }
+
+    clock++;
 }
 
 setInterval(draw, 1000/FPS);
+
+
+
+// ====== 其他函式 ====== //
 
 function isCollided(pointX, pointY, targetX, targetY, targetWidth, targetHeight) {
     if(     pointX >= targetX
