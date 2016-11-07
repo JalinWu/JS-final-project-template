@@ -7,13 +7,13 @@ enemyImg.src = "images/slime.gif";
 var enemy = {
   x: 96,
   y: 480-32,
-  speedX: 0,
-  speedY: -64,
   move: function() {
     this.x += this.speedX/FPS;
     this.y += this.speedY/FPS;
   }
 };
+enemy.speedX = 0;
+enemy.speedY = -64;
 
 var towerBtnImg = document.createElement('img');
 towerBtnImg.src = "images/tower-btn.png";
