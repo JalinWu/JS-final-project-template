@@ -12,8 +12,8 @@ var enemy = {
     this.y += this.speedY/FPS;
   }
 };
-enemy.speedX = 0;
-enemy.speedY = -64;
+// enemy.speedX = 0;
+// enemy.speedY = -64;
 
 var towerBtnImg = document.createElement('img');
 towerBtnImg.src = "images/tower-btn.png";
