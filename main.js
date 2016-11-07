@@ -9,6 +9,7 @@ var enemy = {
   y: 480-32,
   speedX: 0,
   speedY: -64,
+  pathDes: 0,
   move: function(){
         if( isCollided(enemyPath[this.pathDes].x, enemyPath[this.pathDes].y, this.x, this.y, 64/FPS, 64/FPS) ){
 
