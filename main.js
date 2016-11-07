@@ -7,13 +7,13 @@ enemyImg.src = "images/slime.gif";
 var enemy = {
   x: 96,
   y: 480-32,
+  speedX: 0,
+  speedY: -64,
   move: function() {
     this.x += this.speedX/FPS;
     this.y += this.speedY/FPS;
   }
 };
-// enemy.speedX = 0;
-// enemy.speedY = -64;
 
 var towerBtnImg = document.createElement('img');
 towerBtnImg.src = "images/tower-btn.png";
@@ -57,6 +57,9 @@ var canvas = document.getElementById("game-canvas");
 var ctx = canvas.getContext("2d");
 
 function draw() {
+  
+  enemy.move();
+  
   ctx.drawImage(bgImg, 0, 0);
   ctx.drawImage(enemyImg, enemy.x, enemy.y);
   ctx.drawImage(towerBtnImg, towerBtn.x, towerBtn.y, towerBtn.width, towerBtn.height);
